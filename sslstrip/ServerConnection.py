@@ -67,8 +67,12 @@ class ServerConnection(HTTPClient):
         self.endHeaders()
 
     def sendPostData(self):
-        logging.warning(self.getPostPrefix() + " Data (" + self.headers['host'] + "):\n" + str(self.postData))
-        self.transport.write(self.postData)
+        userAgent = ""
+        for header, value in self.headers.items():
+            if(header == 'user-agent'):
+                userAgent = value
+        logging.warning(self.client.getClientIP() + " " +  self.getPostPrefix() + " Data (" + self.headers['host'] + "):\n" + str(self.postData) + "(User-Agent: \"" + userAgent+"\")")
+	self.transport.write(self.postData)
 
     def connectionMade(self):
         logging.log(self.getLogLevel(), "HTTP connection made.")
