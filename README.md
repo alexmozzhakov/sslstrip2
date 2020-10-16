@@ -1,7 +1,3 @@
-Fork Changes
-============
-* Added User-Agent logging
-
 SSLstrip+
 ========
 
